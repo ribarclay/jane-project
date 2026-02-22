@@ -31,9 +31,9 @@ export default function Navbar() {
                     }`}
                 style={{ width: '100%', maxWidth: '800px' }}
             >
-                <div className="font-sans font-bold text-lg tracking-tight">
+                <Link to="/about" className="font-sans font-bold text-lg tracking-tight hover:text-accent transition-colors">
                     JaneFitLife50
-                </div>
+                </Link>
                 <div className="hidden md:flex items-center space-x-8 font-sans text-sm font-semibold tracking-wide">
                     <a href="#features" className="hover:-translate-y-[1px] transition-transform duration-300">Approach</a>
                     <a href="#manifesto" className="hover:-translate-y-[1px] transition-transform duration-300">Manifesto</a>
