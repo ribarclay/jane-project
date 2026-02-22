@@ -19,10 +19,15 @@ export default function Survey() {
         return () => ctx.revert();
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setSubmitted(true);
-    };
+    useEffect(() => {
+        // Check for FormSubmit success redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            setSubmitted(true);
+            // Clean up the URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }, []);
 
     return (
         <div ref={containerRef} className="min-h-screen bg-surface flex flex-col items-center justify-center p-6 relative">
@@ -53,26 +58,31 @@ export default function Survey() {
                             <p className="text-dark/70 text-lg">Tell us a little about yourself, and we'll reach out to schedule a consultation.</p>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                        <form action="https://formsubmit.co/jane.barclay10@gmail.com" method="POST" className="space-y-6">
+                            {/* FormSubmit Configuration */}
+                            <input type="hidden" name="_subject" value="New JaneFitLife50 Transformation Inquiry!" />
+                            <input type="hidden" name="_captcha" value="false" />
+                            <input type="hidden" name="_next" value={window.location.origin + "/survey?success=true"} />
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <label htmlFor="name" className="block text-sm font-bold text-dark mb-2">Full Name</label>
-                                    <input required type="text" id="name" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Jane Doe" />
+                                    <input required type="text" name="name" id="name" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="Jane Doe" />
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block text-sm font-bold text-dark mb-2">Email Address</label>
-                                    <input required type="email" id="email" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="jane@example.com" />
+                                    <input required type="email" name="email" id="email" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="jane@example.com" />
                                 </div>
                             </div>
 
                             <div>
                                 <label htmlFor="phone" className="block text-sm font-bold text-dark mb-2">Phone Number</label>
-                                <input required type="tel" id="phone" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="(555) 123-4567" />
+                                <input required type="tel" name="phone" id="phone" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="(555) 123-4567" />
                             </div>
 
                             <div>
                                 <label htmlFor="time" className="block text-sm font-bold text-dark mb-2">Preferred time of day to speak</label>
-                                <select required id="time" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all appearance-none cursor-pointer">
+                                <select required name="preferred_time" id="time" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all appearance-none cursor-pointer">
                                     <option value="" disabled selected>Select a time...</option>
                                     <option value="morning">Morning (8am - 12pm)</option>
                                     <option value="afternoon">Afternoon (12pm - 5pm)</option>
@@ -82,7 +92,7 @@ export default function Survey() {
 
                             <div>
                                 <label htmlFor="goals" className="block text-sm font-bold text-dark mb-2">What are the main goals you want to achieve?</label>
-                                <textarea required id="goals" rows="4" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" placeholder="e.g. I want to build strength, improve my mobility, and feel more energetic throughout the day without strict dieting..."></textarea>
+                                <textarea required name="goals" id="goals" rows="4" className="w-full bg-surface border border-dark/10 rounded-xl px-4 py-3 text-dark focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none" placeholder="e.g. I want to build strength, improve my mobility, and feel more energetic throughout the day without strict dieting..."></textarea>
                             </div>
 
                             <button type="submit" className="w-full bg-accent text-background py-4 rounded-full font-bold text-lg hover:bg-accent/90 transition-colors shadow-lg hover:shadow-xl mt-4">
