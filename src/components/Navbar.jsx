@@ -31,7 +31,7 @@ export default function Navbar() {
                     }`}
                 style={{ width: '100%', maxWidth: '800px' }}
             >
-                <Link to="/about" className="font-sans font-bold text-lg tracking-tight hover:text-accent transition-colors">
+                <Link to="/about" className="font-sans font-bold text-lg tracking-tight hover:text-accent transition-colors pointer-events-auto">
                     JaneFitLife50
                 </Link>
                 <div className="hidden md:flex items-center space-x-8 font-sans text-sm font-semibold tracking-wide">
