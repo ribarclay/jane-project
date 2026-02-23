@@ -51,7 +51,7 @@ export default function About() {
             <div className="relative w-full h-[70vh] overflow-hidden">
                 <div
                     className="absolute inset-0 w-full h-full"
-                    style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center top' }}
+                    style={{ backgroundImage: `url(${bgImage})`, backgroundSize: 'cover', backgroundPosition: 'center 40%' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
                 <div className="absolute bottom-0 left-0 w-full p-8 md:p-16">
