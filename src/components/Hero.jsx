@@ -14,7 +14,7 @@ export default function Hero() {
                     y: 0,
                     opacity: 1,
                     duration: 1.2,
-                    stagger: 0.15,
+                    stagger: 0.08,
                     ease: 'power3.out',
                     delay: 0.2
                 }

@@ -7,13 +7,30 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ShufflerCard = () => {
     const [cards, setCards] = useState([
-        { id: 1, text: "Whole Food Focus", color: "bg-surface", border: "border-primary/20", z: 30, scale: 1, y: 0 },
-        { id: 2, text: "Mediterranean Principles", color: "bg-primary text-background", border: "border-transparent", z: 20, scale: 0.95, y: -12 },
-        { id: 3, text: "Joyful Nourishment", color: "bg-accent text-background", border: "border-transparent", z: 10, scale: 0.9, y: -24 }
+        {
+            id: 1,
+            text: "Whole Food Focus",
+            desc: "Prioritising minimally processed, nutrient-dense foods. No calorie obsessing — just real food that fuels your body and supports lean muscle.",
+            color: "bg-surface", border: "border-primary/20", z: 30, scale: 1, y: 0
+        },
+        {
+            id: 2,
+            text: "Mediterranean Principles",
+            desc: "Drawing from the world's most researched diet pattern: olive oil, lean proteins, colourful vegetables, and the joy of sharing food — adapted for midlife women.",
+            color: "bg-primary text-background", border: "border-transparent", z: 20, scale: 0.95, y: -12
+        },
+        {
+            id: 3,
+            text: "Joyful Nourishment",
+            desc: "Food is not the enemy. We build a positive, sustainable relationship with eating — so you never feel deprived, and results actually last.",
+            color: "bg-accent text-background", border: "border-transparent", z: 10, scale: 0.9, y: -24
+        }
     ]);
+    const [expanded, setExpanded] = useState(null);
+    const intervalRef = useRef(null);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
+    const startCycle = () => {
+        intervalRef.current = setInterval(() => {
             setCards(prev => {
                 const newArr = [...prev];
                 const last = newArr.pop();
@@ -26,8 +43,31 @@ const ShufflerCard = () => {
                 }));
             });
         }, 3000);
-        return () => clearInterval(interval);
+    };
+
+    useEffect(() => {
+        startCycle();
+        return () => clearInterval(intervalRef.current);
     }, []);
+
+    const handleCardClick = (card) => {
+        if (card.z !== 30) return; // only front card is clickable
+        if (expanded === card.id) {
+            // dismiss
+            setExpanded(null);
+            startCycle();
+        } else {
+            clearInterval(intervalRef.current);
+            setExpanded(card.id);
+            // auto-resume after 5s
+            setTimeout(() => {
+                setExpanded(null);
+                startCycle();
+            }, 5000);
+        }
+    };
+
+    const frontCard = cards.find(c => c.z === 30);
 
     return (
         <div className="bg-surface rounded-[2rem] border border-primary/10 shadow-xl p-8 h-80 flex flex-col items-center justify-center relative overflow-hidden group">
@@ -36,11 +76,24 @@ const ShufflerCard = () => {
                 <p className="font-mono text-xs text-dark/60 uppercase tracking-widest">Sustainable Protocol</p>
             </div>
 
+            {/* Description reveal */}
+            <div className={`absolute inset-0 bg-primary/95 rounded-[2rem] flex flex-col items-center justify-center p-8 text-center transition-all duration-500 z-50 ${expanded ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}>
+                <p className="font-sans font-bold text-background text-lg mb-3">{frontCard?.text}</p>
+                <p className="font-sans text-background/80 text-sm leading-relaxed">{frontCard?.desc}</p>
+                <button
+                    onClick={() => { setExpanded(null); startCycle(); }}
+                    className="mt-6 font-mono text-xs text-background/50 uppercase tracking-widest hover:text-background transition-colors"
+                >Tap to close</button>
+            </div>
+
             <div className="relative w-full max-w-[200px] h-32 mt-12 flex justify-center perspective-[1000px]">
                 {cards.map((card) => (
                     <div
                         key={card.id}
-                        className={`absolute w-full py-4 px-6 rounded-2xl border flex items-center justify-center shadow-lg transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${card.color} ${card.border}`}
+                        onClick={() => handleCardClick(card)}
+                        className={`absolute w-full py-4 px-6 rounded-2xl border flex items-center justify-center shadow-lg transition-all duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${card.color} ${card.border} ${card.z === 30 ? 'cursor-pointer hover:scale-[1.03]' : 'cursor-default'
+                            }`}
                         style={{
                             zIndex: card.z,
                             transform: `translateY(${card.y}px) scale(${card.scale})`,
@@ -50,6 +103,11 @@ const ShufflerCard = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Hint */}
+            <p className="absolute bottom-5 font-mono text-[10px] text-dark/30 uppercase tracking-widest">
+                {expanded ? '' : 'Tap top card to learn more'}
+            </p>
         </div>
     );
 };

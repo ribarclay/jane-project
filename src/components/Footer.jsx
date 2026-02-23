@@ -17,25 +17,25 @@ export default function Footer() {
                     <div>
                         <h4 className="font-sans font-bold text-background mb-4 text-sm tracking-widest uppercase">Navigation</h4>
                         <ul className="space-y-3 font-sans text-sm">
-                            <li><a href="/#features" className="hover:text-primary transition-colors">Approach</a></li>
-                            <li><a href="/#manifesto" className="hover:text-primary transition-colors">Manifesto</a></li>
-                            <li><a href="/#protocol" className="hover:text-primary transition-colors">Protocol</a></li>
+                            <li><a href="/#features" className="hover:text-primary hover:-translate-y-[1px] transition-all duration-200 inline-block">Approach</a></li>
+                            <li><a href="/#manifesto" className="hover:text-primary hover:-translate-y-[1px] transition-all duration-200 inline-block">Manifesto</a></li>
+                            <li><a href="/#protocol" className="hover:text-primary hover:-translate-y-[1px] transition-all duration-200 inline-block">Protocol</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-sans font-bold text-background mb-4 text-sm tracking-widest uppercase">Socials</h4>
                         <ul className="space-y-3 font-sans text-sm">
-                            <li><a href="https://www.instagram.com/janefitlife50/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Instagram</a></li>
-                            <li><a href="https://www.facebook.com/jane.barclay.10" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Facebook</a></li>
+                            <li><a href="https://www.instagram.com/janefitlife50/" target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:-translate-y-[1px] transition-all duration-200 inline-block">Instagram</a></li>
+                            <li><a href="https://www.facebook.com/jane.barclay.10" target="_blank" rel="noopener noreferrer" className="hover:text-primary hover:-translate-y-[1px] transition-all duration-200 inline-block">Facebook</a></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-sans font-bold text-background mb-4 text-sm tracking-widest uppercase">Legal</h4>
                         <ul className="space-y-3 font-sans text-sm">
-                            <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
+                            <li><a href="#" className="hover:text-primary hover:-translate-y-[1px] transition-all duration-200 inline-block">Privacy Policy</a></li>
+                            <li><a href="#" className="hover:text-primary hover:-translate-y-[1px] transition-all duration-200 inline-block">Terms of Service</a></li>
                         </ul>
                     </div>
                 </div>
