@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { ArrowLeft, CheckCircle, Instagram, Facebook, Users, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
+import janeImage from '/Janeexercising.png';
 
 export default function About() {
     const containerRef = useRef(null);
@@ -18,7 +19,7 @@ export default function About() {
         return () => ctx.revert();
     }, []);
 
-    const bgImage = "/Janeexercising.png";
+    const bgImage = janeImage;
 
     const focusAreas = [
         {
