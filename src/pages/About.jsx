@@ -18,7 +18,7 @@ export default function About() {
         return () => ctx.revert();
     }, []);
 
-    const bgImage = "/Janeexercising.jpg";
+    const bgImage = "/Janeexercising.png";
 
     const focusAreas = [
         {
