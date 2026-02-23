@@ -18,7 +18,7 @@ export default function About() {
         return () => ctx.revert();
     }, []);
 
-    const bgImage = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2940&auto=format&fit=crop";
+    const bgImage = "/Janeexercising.jpg";
 
     const focusAreas = [
         {
